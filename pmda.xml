@@ -1,0 +1,23 @@
+<Container>
+  <Name>PMDA</Name>
+  <Repository>meaning/pmda:latest</Repository>
+  <Registry>https://hub.docker.com/r/meaning/pmda</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/silkyclouds/PMDA/issues</Support>
+  <Project>https://github.com/silkyclouds/PMDA</Project>
+  <Overview>PMDA: Plex Music DeDupe Assistant - detect and clean duplicate albums in your Plex music library with style and AI-assisted logic.</Overview>
+  <Category>MediaApplication:Music</Category>
+
+  <WebUI>http://[IP]:[PORT:5005]</WebUI>
+  <Icon>https://raw.githubusercontent.com/silkyclouds/PMDA/main/static/P.png</Icon>
+
+  <Config Name="Host Port" Target="5005" Default="5005" Mode="tcp" Description="WebUI port" Type="Port"/>
+  <Config Name="config.json" Target="/app/config.json" Default="/mnt/user/appdata/pmda/config.json" Mode="ro" Description="Configuration file" Type="Path"/>
+  <Config Name="ai_prompt.txt" Target="/app/ai_prompt.txt" Default="/mnt/user/appdata/pmda/ai_prompt.txt" Mode="ro" Description="Optional AI prompt file" Type="Path"/>
+  <Config Name="Plex Database" Target="/database" Default="/mnt/user/appdata/plex/Library/Application Support/Plex Media Server/Plug-in Support/Databases" Mode="ro" Description="Plex DB folder" Type="Path"/>
+  <Config Name="Music Matched Folder" Target="/music/matched" Default="/mnt/user/music/matched" Mode="rw" Description="Main music folder" Type="Path"/>
+  <Config Name="Dupe Output Folder" Target="/dupes" Default="/mnt/user/music/dupes" Mode="rw" Description="Where to move duplicate albums" Type="Path"/>
+</Container>
