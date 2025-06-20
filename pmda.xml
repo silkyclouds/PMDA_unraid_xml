@@ -3,21 +3,53 @@
   <Repository>meaning/pmda:latest</Repository>
   <Registry>https://hub.docker.com/r/meaning/pmda</Registry>
   <Network>bridge</Network>
-  <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support>https://github.com/silkyclouds/PMDA/issues</Support>
   <Project>https://github.com/silkyclouds/PMDA</Project>
-  <Overview>PMDA: Plex Music DeDupe Assistant - detect and clean duplicate albums in your Plex music library with style and AI-assisted logic.</Overview>
+  <Overview>
+    PMDA: Plex Music DeDupe Assistant – detect and clean duplicate albums in your Plex music library with AI-assisted logic.
+  </Overview>
   <Category>MediaApp:Music</Category>
-
   <WebUI>http://[IP]:[PORT:5005]</WebUI>
   <Icon>https://raw.githubusercontent.com/silkyclouds/PMDA/main/static/P.png</Icon>
 
-  <Config Name="Host Port" Target="5005" Default="5005" Mode="tcp" Description="WebUI port" Type="Port"/>
-  <Config Name="config.json" Target="/app/config.json" Default="/mnt/user/appdata/pmda/config.json" Mode="ro" Description="Configuration file" Type="Path"/>
-  <Config Name="ai_prompt.txt" Target="/app/ai_prompt.txt" Default="/mnt/user/appdata/pmda/ai_prompt.txt" Mode="ro" Description="Optional AI prompt file" Type="Path"/>
-  <Config Name="Plex Database" Target="/database" Default="/mnt/user/appdata/plex/Library/Application Support/Plex Media Server/Plug-in Support/Databases" Mode="ro" Description="Plex DB folder" Type="Path"/>
-  <Config Name="Music Matched Folder" Target="/music/matched" Default="/mnt/user/music/matched" Mode="rw" Description="Main music folder" Type="Path"/>
-  <Config Name="Dupe Output Folder" Target="/dupes" Default="/mnt/user/music/dupes" Mode="rw" Description="Where to move duplicate albums" Type="Path"/>
+  <!-- ===== Required Environment Variables ===== -->
+  <Config Name="Plex Host URL" Target="PLEX_HOST" Default="http://<PLEX_IP>:32400" Mode="env" Description="(Required) Base URL of your Plex server, including port." Type="Variable"/>
+  <Config Name="Plex Token" Target="PLEX_TOKEN" Default="<YOUR_PLEX_TOKEN>" Mode="env" Description="(Required) Your Plex API token (X-Plex-Token)." Type="Variable"/>
+  <Config Name="Library Section ID" Target="SECTION_ID" Default="1" Mode="env" Description="(Required) Numeric ID of your Music section in Plex." Type="Variable"/>
+
+  <!-- ===== Plex Database Location ===== -->
+  <Config Name="Plex DB Path" Target="PLEX_DB_PATH" Default="/database" Mode="env" Description="(Required) Host-path to Plex Media Server's 'Plug-in Support/Databases' folder." Type="Variable"/>
+  <Config Name="Plex DB File" Target="PLEX_DB_FILE" Default="com.plexapp.plugins.library.db" Mode="env" Description="(Required) Name of the Plex SQLite library file." Type="Variable"/>
+
+  <!-- ===== Behavior & Logging ===== -->
+  <Config Name="Default Mode" Target="PMDA_DEFAULT_MODE" Default="serve" Mode="env" Description="(Optional) 'serve' to launch web UI, 'cli' for command-line scan. Defaults to 'serve'." Type="Variable"/>
+  <Config Name="Log Level" Target="LOG_LEVEL" Default="INFO" Mode="env" Description="(Optional) Minimum log level: DEBUG, INFO, WARNING, ERROR." Type="Variable"/>
+  <Config Name="Scan Threads" Target="SCAN_THREADS" Default="8" Mode="env" Description="(Optional) Number of parallel scan threads (default = CPU cores)." Type="Variable"/>
+
+  <!-- ===== AI / Deduplication ===== -->
+  <Config Name="OpenAI Model" Target="OPENAI_MODEL" Default="gpt-4.1-nano" Mode="env" Description="(Optional) LLM model to use for fuzzy matching." Type="Variable"/>
+  <Config Name="OpenAI API Key" Target="OPENAI_API_KEY" Default="" Mode="env" Description="(Optional) OpenAI API key to enable AI-assisted selection; leave blank to disable." Type="Variable"/>
+  <Config Name="AI Prompt File" Target="AI_PROMPT_FILE" Default="/app/ai_prompt.txt" Mode="ro" Description="(Optional) Custom prompt template for AI selection." Type="Path"/>
+
+  <!-- ===== Path Mappings & Output ===== -->
+  <Config Name="Path Map JSON" Target="PATH_MAP" Default='{"\/music\/matched":"\/music\/matched"}' Mode="env" Description="(Optional) JSON mapping container→host paths for media roots." Type="Variable"/>
+  <Config Name="Duplicate Output Root" Target="DUPE_ROOT" Default="/dupes" Mode="env" Description="(Required) Where to move detected duplicate folders." Type="Variable"/>
+
+  <!-- ===== Persisted State Files ===== -->
+  <Config Name="Config Dir (vol)" Target="/app/config" Default="/mnt/user/appdata/pmda" Mode="rw" Description="(Required) Host-path for PMDA config.json, state.db, cache.db." Type="Path"/>
+  <Config Name="State DB File" Target="STATE_DB_FILE" Default="./pmda_state.db" Mode="rw" Description="(Internal) Name/location of scan state DB (inside config dir)." Type="Variable"/>
+  <Config Name="Cache DB File" Target="CACHE_DB_FILE" Default="./pmda_cache.db" Mode="rw" Description="(Internal) Name/location of audio-probe cache DB." Type="Variable"/>
+
+  <!-- ===== Volume Mounts ===== -->
+  <Config Name="Plex DB Folder" Target="/database" Default="/mnt/user/appdata/plex/.../Databases" Mode="ro" Description="(Required) Mount Plex DB folder here." Type="Path"/>
+  <Config Name="Music Matched Folder" Target="/music/matched" Default="/mnt/user/music/matched" Mode="rw" Description="(Required) Your organized music folder." Type="Path"/>
+  <Config Name="Music Unmatched Folder" Target="/music/unmatched" Default="/mnt/user/music/unmatched" Mode="rw" Description="(Optional) Folder for files not yet processed." Type="Path"/>
+  <Config Name="Music Compilations" Target="/music/compilations" Default="/mnt/user/music/compilations" Mode="rw" Description="(Optional) Your compilations folder." Type="Path"/>
+  <Config Name="Dupe Output Folder" Target="/dupes" Default="/mnt/user/music/dupes" Mode="rw" Description="(Required) Mount matches DUPE_ROOT — where dupes will be moved." Type="Path"/>
+
+  <!-- ===== Ports ===== -->
+  <Config Name="WebUI Port" Target="WEBUI_PORT" Default="5005" Mode="env" Description="(Optional) Port for the Flask web UI (also map container port 5005)." Type="Port"/>
+  <Config Name="Host Port" Target="5005" Default="5005" Mode="tcp" Description="Map your chosen WebUI port here." Type="Port"/>
 </Container>
