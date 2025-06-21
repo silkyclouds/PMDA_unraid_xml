@@ -14,60 +14,48 @@
   <Icon>https://raw.githubusercontent.com/silkyclouds/PMDA/main/static/P.png</Icon>
 
   <!-- --------- Required Variables --------- -->
-  <Config Name="PLEX_HOST"          Target="PLEX_HOST"
-          Default="http://192.168.3.2:32400"
+  <Config Name="PLEX_HOST"   Target="PLEX_HOST"   Default="http://192.168.3.2:32400"
           Mode="env" Type="Variable" Display="always" Required="true" />
-  <Config Name="PLEX_TOKEN"         Target="PLEX_TOKEN"
-          Default=""
+  <Config Name="PLEX_TOKEN"  Target="PLEX_TOKEN"  Default=""
           Mode="env" Type="Variable" Display="always" Required="true" Mask="true" />
-  <Config Name="SECTION_ID"         Target="SECTION_ID"
-          Default="1"
+  <Config Name="SECTION_ID"  Target="SECTION_ID"  Default="1"
           Mode="env" Type="Variable" Display="always" Required="true" />
-  <Config Name="PLEX_DB_PATH"       Target="PLEX_DB_PATH"
-          Default="/database"
+  <Config Name="PLEX_DB_PATH" Target="PLEX_DB_PATH" Default="/database"
           Mode="env" Type="Variable" Display="always" Required="true" />
-  <Config Name="PLEX_DB_FILE"       Target="PLEX_DB_FILE"
-          Default="com.plexapp.plugins.library.db"
+  <Config Name="PLEX_DB_FILE" Target="PLEX_DB_FILE" Default="com.plexapp.plugins.library.db"
           Mode="env" Type="Variable" Display="always" Required="true" />
-  <Config Name="DUPE_ROOT"          Target="DUPE_ROOT"
-          Default="/dupes"
+  <Config Name="DUPE_ROOT"   Target="DUPE_ROOT"   Default="/dupes"
           Mode="env" Type="Variable" Display="always" Required="true" />
-  <!-- JSON string without single quotes or escaped slashes -->
-  <Config Name="PATH_MAP"           Target="PATH_MAP"
-          Default="{\"/music/matched\":\"/music/matched\"}"
+
+  <!-- --------- PATH_MAP : multi-line friendly --------- -->
+  <!-- Edit this JSON and add/remove any mapping you need -->
+  <Config Name="PATH_MAP" Target="PATH_MAP"
+          Default="{\"/music/matched\":\"/path/to/music/matched\", \"./add_more_here\":\"/path/on/host\"}"
+          TextArea="true"
           Mode="env" Type="Variable" Display="always" Required="true" />
 
   <!-- --------- Optional Behaviour / Logging --------- -->
-  <Config Name="PMDA_DEFAULT_MODE"  Target="PMDA_DEFAULT_MODE"
-          Default="serve"
+  <Config Name="PMDA_DEFAULT_MODE" Target="PMDA_DEFAULT_MODE" Default="serve"
           Mode="env" Type="Variable" Display="advanced" />
-  <Config Name="DISABLE_WEBUI"      Target="DISABLE_WEBUI"
-          Default="false"
+  <Config Name="DISABLE_WEBUI"     Target="DISABLE_WEBUI"     Default="false"
           Mode="env" Type="Variable" Display="advanced" />
-  <Config Name="LOG_LEVEL"          Target="LOG_LEVEL"
-          Default="INFO"
+  <Config Name="LOG_LEVEL"         Target="LOG_LEVEL"         Default="INFO"
           Mode="env" Type="Variable" Display="advanced" />
-  <Config Name="SCAN_THREADS"       Target="SCAN_THREADS"
-          Default="8"
+  <Config Name="SCAN_THREADS"      Target="SCAN_THREADS"      Default="8"
           Mode="env" Type="Variable" Display="advanced" />
 
   <!-- --------- AI Settings --------- -->
-  <Config Name="OPENAI_MODEL"       Target="OPENAI_MODEL"
-          Default="gpt-4o-nano"
+  <Config Name="OPENAI_MODEL"      Target="OPENAI_MODEL"      Default="gpt-4o-nano"
           Mode="env" Type="Variable" Display="advanced" />
-  <Config Name="OPENAI_API_KEY"     Target="OPENAI_API_KEY"
-          Default=""
+  <Config Name="OPENAI_API_KEY"    Target="OPENAI_API_KEY"    Default=""
           Mode="env" Type="Variable" Display="advanced" Mask="true" />
-  <Config Name="FORMAT_PREFERENCE"  Target="FORMAT_PREFERENCE"
-          Default="flac|m4a|mp3"
+  <Config Name="FORMAT_PREFERENCE" Target="FORMAT_PREFERENCE" Default="flac|m4a|mp3"
           Mode="env" Type="Variable" Display="advanced" />
 
   <!-- --------- State files --------- -->
-  <Config Name="STATE_DB_FILE"      Target="STATE_DB_FILE"
-          Default="./state.db"
+  <Config Name="STATE_DB_FILE"     Target="STATE_DB_FILE"     Default="./state.db"
           Mode="env" Type="Variable" Display="advanced" />
-  <Config Name="CACHE_DB_FILE"      Target="CACHE_DB_FILE"
-          Default="./cache.db"
+  <Config Name="CACHE_DB_FILE"     Target="CACHE_DB_FILE"     Default="./cache.db"
           Mode="env" Type="Variable" Display="advanced" />
 
   <!-- --------- Volumes (generic host paths) --------- -->
