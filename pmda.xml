@@ -1,126 +1,212 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <Container version="2">
   <Name>PMDA</Name>
   <Repository>meaning/pmda:latest</Repository>
+  <Registry>https://hub.docker.com/r/meaning/pmda</Registry>
   <Network>bridge</Network>
-  <Shell>/bin/sh</Shell>
+  <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support>https://github.com/silkyclouds/PMDA/issues</Support>
   <Project>https://github.com/silkyclouds/PMDA</Project>
   <Overview>PMDA: Plex Music DeDupe Assistant – detect and clean duplicate albums in your Plex music library with optional AI assistance.</Overview>
-  <Category>MediaApp:Music Status:Beta</Category>
+  <Category>MediaApp:Music</Category>
   <WebUI>http://[IP]:[PORT:5005]</WebUI>
   <Icon>https://raw.githubusercontent.com/silkyclouds/PMDA/main/static/P.png</Icon>
 
-  <Config Name="PLEX_HOST"
-          Value="http://192.168.3.2:32400"
-          Description="Base URL of your Plex server, including port."
-          Type="Variable" Display="always" Required="true" />
-  <Config Name="PLEX_TOKEN"
-          Value=""
-          Description="Your Plex API token (X-Plex-Token)."
-          Type="Variable" Display="always" Required="true" Mask="true" />
-  <Config Name="SECTION_ID"
-          Value="1"
-          Description="Numeric ID of your Plex Music library section."
-          Type="Variable" Display="always" Required="true" />
-  <Config Name="PLEX_DB_PATH"
-          Value="/database"
-          Description="Container path for the Plex SQLite database."
-          Type="Variable" Display="always" Required="true" />
-  <Config Name="PLEX_DB_FILE"
-          Value="com.plexapp.plugins.library.db"
-          Description="Filename of the Plex SQLite database."
-          Type="Variable" Display="always" Required="true" />
-  <Config Name="DUPE_ROOT"
-          Value="/dupes"
-          Description="Container path where duplicate albums will be moved."
-          Type="Variable" Display="always" Required="true" />
+  <!-- Required Variables -->
+  <Config Name="Plex Host URL"
+          Target="PLEX_HOST"
+          Default="http://192.168.3.2:32400"
+          Mode=""
+          Description="(Required) Base URL of your Plex server, including port."
+          Type="Variable"
+          Display="always"
+          Required="true" />
+  <Config Name="Plex Token"
+          Target="PLEX_TOKEN"
+          Default=""
+          Mode=""
+          Description="(Required) Your Plex API token (X-Plex-Token)."
+          Type="Variable"
+          Display="always"
+          Required="true"
+          Mask="true" />
+  <Config Name="Music Section ID"
+          Target="SECTION_ID"
+          Default="1"
+          Mode=""
+          Description="(Required) Numeric ID of your Plex Music library section."
+          Type="Variable"
+          Display="always"
+          Required="true" />
 
-  <Config Name="PATH_MAP"
-          Value="{&quot;/music/matched&quot;:&quot;/path/to/music/matched&quot;,&quot;/music/unmatched&quot;:&quot;/path/to/music/unmatched&quot;,&quot;/music/compilations&quot;:&quot;/path/to/music/compilations&quot;}"
-          Description="JSON mapping of container paths to host paths."
-          Type="Variable" Display="always" Required="true" TextArea="true" />
+  <!-- Plex DB Settings -->
+  <Config Name="Plex DB Path"
+          Target="PLEX_DB_PATH"
+          Default="/database"
+          Mode=""
+          Description="(Required) Host directory for Plex DB (Plug-in Support/Databases)."
+          Type="Path"
+          Display="always"
+          Required="true" />
+  <Config Name="Plex DB File"
+          Target="PLEX_DB_FILE"
+          Default="com.plexapp.plugins.library.db"
+          Mode=""
+          Description="(Required) Plex SQLite DB filename."
+          Type="Variable"
+          Display="always"
+          Required="true" />
 
-  <Config Name="PMDA_DEFAULT_MODE"
-          Value="serve"
-          Description="'serve' for Web UI, 'cli' for command-line mode."
-          Type="Variable" Display="advanced" Required="true" />
-  <Config Name="DISABLE_WEBUI"
-          Value="false"
-          Description="Set to true to disable the built-in Web UI."
-          Type="Variable" Display="advanced" Required="false" />
-  <Config Name="LOG_LEVEL"
-          Value="INFO"
-          Description="Logging level: DEBUG, INFO, WARNING, ERROR."
-          Type="Variable" Display="advanced" Required="false" />
-  <Config Name="SCAN_THREADS"
-          Value="8"
-          Description="Number of parallel scanning threads."
-          Type="Variable" Display="advanced" Required="false" />
+  <!-- Behavior & Logging -->
+  <Config Name="Default Mode"
+          Target="PMDA_DEFAULT_MODE"
+          Default="serve"
+          Mode=""
+          Description="(Optional) 'serve' for Web UI mode, 'cli' for command-line scan."
+          Type="Variable"
+          Display="advanced"
+          Required="false" />
+  <Config Name="Disable Web UI"
+          Target="DISABLE_WEBUI"
+          Default="false"
+          Mode=""
+          Description="(Optional) Set true to disable serving the Web UI."
+          Type="Variable"
+          Display="advanced"
+          Required="false" />
+  <Config Name="Log Level"
+          Target="LOG_LEVEL"
+          Default="INFO"
+          Mode=""
+          Description="(Optional) Logging level: DEBUG, INFO, WARNING, ERROR."
+          Type="Variable"
+          Display="advanced"
+          Required="false" />
+  <Config Name="Scan Threads"
+          Target="SCAN_THREADS"
+          Default="8"
+          Mode=""
+          Description="(Optional) Number of parallel scanning threads."
+          Type="Variable"
+          Display="advanced"
+          Required="false" />
 
-  <Config Name="OPENAI_MODEL"
-          Value="gpt-4o-nano"
-          Description="LLM model for AI-assisted dedupe."
-          Type="Variable" Display="advanced" Required="false" />
-  <Config Name="OPENAI_API_KEY"
-          Value=""
-          Description="Your OpenAI API key (leave blank to disable AI)."
-          Type="Variable" Display="advanced" Required="false" Mask="true" />
-  <Config Name="FORMAT_PREFERENCE"
-          Value="flac|m4a|mp3"
-          Description="List of audio formats by priority, separated by '|' or ','."
-          Type="Variable" Display="advanced" Required="false" />
+  <!-- AI / Deduplication -->
+  <Config Name="OpenAI Model"
+          Target="OPENAI_MODEL"
+          Default="gpt-4o-nano"
+          Mode=""
+          Description="(Optional) LLM model for intelligent duplicate selection."
+          Type="Variable"
+          Display="advanced"
+          Required="false" />
+  <Config Name="OpenAI API Key"
+          Target="OPENAI_API_KEY"
+          Default=""
+          Mode=""
+          Description="(Optional) OpenAI API key to enable AI-assisted dedupe; leave blank to disable."
+          Type="Variable"
+          Display="advanced"
+          Required="false"
+          Mask="true" />
+  <Config Name="Format Preference"
+          Target="FORMAT_PREFERENCE"
+          Default="flac|m4a|mp3"
+          Mode=""
+          Description="(Optional) Comma- or pipe-separated list of audio formats by priority."
+          Type="Variable"
+          Display="advanced"
+          Required="false" />
 
-  <Config Name="STATE_DB_FILE"
-          Value="./state.db"
-          Description="Filename for scan-state database (in config directory)."
-          Type="Variable" Display="advanced" Required="false" />
-  <Config Name="CACHE_DB_FILE"
-          Value="./cache.db"
-          Description="Filename for audio-probe cache database."
-          Type="Variable" Display="advanced" Required="false" />
+  <!-- Path mappings & Output -->
+  <Config Name="Path Map JSON"
+          Target="PATH_MAP"
+          Default="{&quot;/music/matched&quot;:&quot;/path/to/music/matched&quot;,&quot;/music/unmatched&quot;:&quot;/path/to/music/unmatched&quot;,&quot;/music/compilations&quot;:&quot;/path/to/music/compilations&quot;}"
+          Mode=""
+          Description="(Optional) JSON mapping container paths → host paths for media root(s)."
+          Type="Variable"
+          Display="always"
+          Required="true" />
 
+  <!-- Persisted State Files -->
+  <Config Name="State DB File"
+          Target="STATE_DB_FILE"
+          Default="./state.db"
+          Mode=""
+          Description="(Optional) Filename for scan-state DB (in config directory)."
+          Type="Variable"
+          Display="advanced"
+          Required="false" />
+  <Config Name="Cache DB File"
+          Target="CACHE_DB_FILE"
+          Default="./cache.db"
+          Mode=""
+          Description="(Optional) Filename for audio-probe cache DB."
+          Type="Variable"
+          Display="advanced"
+          Required="false" />
+
+  <!-- Volumes -->
   <Config Name="Config Directory"
           Target="/app/config"
           Default="/path/to/appdata/pmda"
           Mode="rw"
-          Description="Host path for PMDA config and state files."
-          Type="Path" Display="always" Required="true" />
+          Description="(Required) Host path for config.json, state.db, cache.db."
+          Type="Path"
+          Display="always"
+          Required="true" />
   <Config Name="Plex DB Volume"
           Target="/database"
           Default="/path/to/plex/Plug-in Support/Databases"
           Mode="ro"
-          Description="Host folder containing Plex SQLite database."
-          Type="Path" Display="always" Required="true" />
+          Description="(Required) Plex DB folder mountpoint."
+          Type="Path"
+          Display="always"
+          Required="true" />
   <Config Name="Music Matched Volume"
           Target="/music/matched"
           Default="/path/to/music/matched"
           Mode="rw"
-          Description="Host path for organized music folder."
-          Type="Path" Display="always" Required="true" />
+          Description="(Required) Organized music folder."
+          Type="Path"
+          Display="always"
+          Required="true" />
   <Config Name="Music Unmatched Volume"
           Target="/music/unmatched"
           Default="/path/to/music/unmatched"
           Mode="rw"
-          Description="Optional host path for unprocessed music."
-          Type="Path" Display="advanced" Required="false" />
+          Description="(Optional) Folder for unprocessed music."
+          Type="Path"
+          Display="advanced"
+          Required="false" />
   <Config Name="Music Compilations Volume"
           Target="/music/compilations"
           Default="/path/to/music/compilations"
           Mode="rw"
-          Description="Optional host path for compilation albums."
-          Type="Path" Display="advanced" Required="false" />
+          Description="(Optional) Compilations folder."
+          Type="Path"
+          Display="advanced"
+          Required="false" />
   <Config Name="Dupe Output Volume"
           Target="/dupes"
           Default="/path/to/music/dupes"
           Mode="rw"
-          Description="Host path where duplicate folders will be moved."
-          Type="Path" Display="always" Required="true" />
+          Description="(Required) Where to move detected duplicate folders."
+          Type="Path"
+          Display="always"
+          Required="true" />
 
-  <Port>
-    <HostPort>5005</HostPort>
-    <ContainerPort>5005</ContainerPort>
-    <Protocol>tcp</Protocol>
-  </Port>
+  <!-- Ports -->
+  <Config Name="WebUI Port"
+          Target="WEBUI_PORT"
+          Default="5005"
+          Mode="tcp"
+          Description="(Required) Port for Flask Web UI (map container port 5005)."
+          Type="Port"
+          Display="always"
+          Required="true" />
+
+  <ExtraParams/>
+  <PostArgs/>
 </Container>
