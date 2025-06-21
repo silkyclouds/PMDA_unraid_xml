@@ -45,7 +45,7 @@
   <Config Name="PMDA_DEFAULT_MODE"
           Value="serve"
           Description="'serve' for Web UI, 'cli' for command-line mode."
-          Type="Variable" Display="advanced" Required="false" />
+          Type="Variable" Display="advanced" Required="true" />
   <Config Name="DISABLE_WEBUI"
           Value="false"
           Description="Set to true to disable the built-in Web UI."
