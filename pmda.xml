@@ -13,6 +13,7 @@
   <WebUI>http://[IP]:[PORT:5005]</WebUI>
   <Icon>https://raw.githubusercontent.com/silkyclouds/PMDA/main/static/P.png</Icon>
 
+  <!-- Required Variables -->
   <Config Name="Plex Host URL"
           Target="PLEX_HOST"
           Default="http://192.168.3.2:32400"
@@ -39,6 +40,7 @@
           Display="always"
           Required="true" />
 
+  <!-- Advanced Plex DB Settings -->
   <Config Name="Plex DB Path"
           Target="PLEX_DB_PATH"
           Default="/database"
@@ -56,6 +58,7 @@
           Display="advanced"
           Required="true" />
 
+  <!-- Non-advanced AI Settings -->
   <Config Name="OpenAI Model"
           Target="OPENAI_MODEL"
           Default="gpt-4o-nano"
@@ -68,17 +71,18 @@
           Target="OPENAI_API_KEY"
           Default=""
           Mode=""
-          Description="(Optional) OpenAI API key; leave blank to disable AI."
+          Description="(Optional) OpenAI API key; leave blank to disable AI assistance."
           Type="Variable"
           Display="always"
           Required="false"
           Mask="true" />
 
+  <!-- Advanced Behaviour & Logging -->
   <Config Name="Default Mode"
           Target="PMDA_DEFAULT_MODE"
           Default="serve"
           Mode=""
-          Description="(Optional) 'serve' for Web UI mode, 'cli' for command-line scan."
+          Description="(Optional) 'serve' for Web UI mode, 'cli' for CLI scan."
           Type="Variable"
           Display="advanced"
           Required="false" />
@@ -107,15 +111,17 @@
           Display="advanced"
           Required="false" />
 
-  <Config Name="Path Map JSON"
+  <!-- Path Map -->
+  <Config Name="Path Map"
           Target="PATH_MAP"
-          Default="{&quot;/music/matched&quot;:&quot;/path/to/music/matched&quot;,&quot;/music/unmatched&quot;:&quot;/path/to/music/unmatched&quot;,&quot;/music/compilations&quot;:&quot;/path/to/music/compilations&quot;}"
+          Default="{&quot;/music&quot;:&quot;/path/to/music&quot;}"
           Mode=""
-          Description="(Optional) JSON mapping of container paths to host paths; create one mapping per Plex library path."
+          Description="(Required) JSON object mapping from each Plex library container path to its corresponding PMDA container path, e.g. '/path/in/plex/library':'/path/in/PMDA'. Add one entry per library path."
           Type="Variable"
           Display="always"
           Required="true" />
 
+  <!-- Volumes -->
   <Config Name="Config Directory"
           Target="/app/config"
           Default="/path/to/appdata/pmda"
@@ -136,7 +142,7 @@
           Target="/music"
           Default="/path/to/music"
           Mode="rw"
-          Description="(Required) Host path for your music; create one mapping per Plex library path."
+          Description="(Required) Host path for your music; create one mapping per Plex library path above."
           Type="Path"
           Display="always"
           Required="true" />
@@ -149,6 +155,7 @@
           Display="always"
           Required="true" />
 
+  <!-- Advanced State files -->
   <Config Name="State DB File"
           Target="STATE_DB_FILE"
           Default="./state.db"
@@ -166,12 +173,13 @@
           Display="advanced"
           Required="false" />
 
-  <Port Name="WebUI Port"
-        Target="WEBUI_PORT"
-        Default="5005"
-        Mode="tcp"
-        Description="(Required) Port for Flask Web UI (map container port 5005)."
-        Type="Port"
-        Display="always"
-        Required="true" />
+  <!-- Port -->
+  <Config Name="WebUI Port"
+          Target="WEBUI_PORT"
+          Default="5005"
+          Mode="tcp"
+          Description="(Required) Map this host port to container port 5005 for the Web UI."
+          Type="Port"
+          Display="always"
+          Required="true" />
 </Container>
