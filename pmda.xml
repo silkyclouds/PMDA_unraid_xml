@@ -17,109 +17,84 @@
   <Config Name="Plex Host URL"
           Target="PLEX_HOST"
           Default="http://192.168.3.2:32400"
-          Mode=""
           Description="(Required) Base URL of your Plex server, including port."
-          Type="Variable"
-          Display="always"
-          Required="true" />
+          Type="Variable" Display="always" Required="true" />
+
   <Config Name="Plex Token"
           Target="PLEX_TOKEN"
           Default=""
-          Mode=""
           Description="(Required) Your Plex API token (X-Plex-Token)."
-          Type="Variable"
-          Display="always"
-          Required="true"
-          Mask="true" />
+          Type="Variable" Display="always" Required="true" Mask="true" />
+
   <Config Name="Music Section ID"
           Target="SECTION_ID"
           Default="1"
-          Mode=""
           Description="(Required) Numeric ID of your Plex Music library section."
-          Type="Variable"
-          Display="always"
-          Required="true" />
+          Type="Variable" Display="always" Required="true" />
+
+  <Config Name="Dupe Root"
+          Target="DUPE_ROOT"
+          Default="/dupes"
+          Description="(Required) Container path where PMDA moves detected duplicate folders."
+          Type="Variable" Display="always" Required="true" />
 
   <!-- Advanced Plex DB Settings -->
   <Config Name="Plex DB Path"
           Target="PLEX_DB_PATH"
           Default="/database"
-          Mode=""
           Description="(Required) Host directory for Plex DB (Plug-in Support/Databases)."
-          Type="Path"
-          Display="advanced"
-          Required="true" />
+          Type="Path" Display="advanced" Required="true" />
+
   <Config Name="Plex DB File"
           Target="PLEX_DB_FILE"
           Default="com.plexapp.plugins.library.db"
-          Mode=""
-          Description="(Required) Plex SQLite DB filename."
-          Type="Variable"
-          Display="advanced"
-          Required="true" />
+          Description="(Required) Filename of the Plex SQLite DB."
+          Type="Variable" Display="advanced" Required="true" />
 
   <!-- Non-advanced AI Settings -->
   <Config Name="OpenAI Model"
           Target="OPENAI_MODEL"
           Default="gpt-4o-nano"
-          Mode=""
           Description="(Optional) LLM model for intelligent duplicate selection."
-          Type="Variable"
-          Display="always"
-          Required="false" />
+          Type="Variable" Display="always" Required="false" />
+
   <Config Name="OpenAI API Key"
           Target="OPENAI_API_KEY"
           Default=""
-          Mode=""
           Description="(Optional) OpenAI API key; leave blank to disable AI assistance."
-          Type="Variable"
-          Display="always"
-          Required="false"
-          Mask="true" />
+          Type="Variable" Display="always" Required="false" Mask="true" />
 
   <!-- Advanced Behaviour & Logging -->
   <Config Name="Default Mode"
           Target="PMDA_DEFAULT_MODE"
           Default="serve"
-          Mode=""
           Description="(Optional) 'serve' for Web UI mode, 'cli' for CLI scan."
-          Type="Variable"
-          Display="advanced"
-          Required="false" />
+          Type="Variable" Display="advanced" Required="false" />
+
   <Config Name="Disable Web UI"
           Target="DISABLE_WEBUI"
           Default="false"
-          Mode=""
           Description="(Optional) Set true to disable the built-in Web UI."
-          Type="Variable"
-          Display="advanced"
-          Required="false" />
+          Type="Variable" Display="advanced" Required="false" />
+
   <Config Name="Log Level"
           Target="LOG_LEVEL"
           Default="INFO"
-          Mode=""
           Description="(Optional) Logging level: DEBUG, INFO, WARNING, ERROR."
-          Type="Variable"
-          Display="advanced"
-          Required="false" />
+          Type="Variable" Display="advanced" Required="false" />
+
   <Config Name="Scan Threads"
           Target="SCAN_THREADS"
           Default="8"
-          Mode=""
           Description="(Optional) Number of parallel scanning threads."
-          Type="Variable"
-          Display="advanced"
-          Required="false" />
+          Type="Variable" Display="advanced" Required="false" />
 
   <!-- Path Map -->
   <Config Name="Path Map"
           Target="PATH_MAP"
           Default="{&quot;/music&quot;:&quot;/path/to/music&quot;}"
-          Mode=""
-          Description="(Required) JSON object mapping from each Plex library container path to its corresponding PMDA container path, e.g. '/path/in/plex/library':'/path/in/PMDA'. Add one entry per library path."
-          Type="Variable"
-          Display="always"
-          Required="true" />
+          Description="(Required) JSON mapping each Plex-library container path to its corresponding PMDA container path, e.g. '/chemin/dans/plex':'/chemin/dans/PMDA'. Ajoutez une entrée par chemin de librairie."
+          Type="Variable" Display="always" Required="true" />
 
   <!-- Volumes -->
   <Config Name="Config Directory"
@@ -127,51 +102,41 @@
           Default="/path/to/appdata/pmda"
           Mode="rw"
           Description="(Required) Host path for config.json, state.db, cache.db."
-          Type="Path"
-          Display="always"
-          Required="true" />
+          Type="Path" Display="always" Required="true" />
+
   <Config Name="Plex DB Volume"
           Target="/database"
           Default="/path/to/plex/Plug-in Support/Databases"
           Mode="ro"
           Description="(Required) Plex DB folder mountpoint."
-          Type="Path"
-          Display="always"
-          Required="true" />
+          Type="Path" Display="always" Required="true" />
+
   <Config Name="Music Folder"
           Target="/music"
           Default="/path/to/music"
           Mode="rw"
-          Description="(Required) Host path for your music; create one mapping per Plex library path above."
-          Type="Path"
-          Display="always"
-          Required="true" />
+          Description="(Required) Host path for your music; créez une mapping par chemin Plex."
+          Type="Path" Display="always" Required="true" />
+
   <Config Name="Dupe Output Volume"
           Target="/dupes"
           Default="/path/to/music/dupes"
           Mode="rw"
-          Description="(Required) Where to move detected duplicate folders."
-          Type="Path"
-          Display="always"
-          Required="true" />
+          Description="(Required) Host path where duplicate albums will be moved."
+          Type="Path" Display="always" Required="true" />
 
   <!-- Advanced State files -->
   <Config Name="State DB File"
           Target="STATE_DB_FILE"
           Default="./state.db"
-          Mode=""
           Description="(Optional) Filename for scan-state DB (in config directory)."
-          Type="Variable"
-          Display="advanced"
-          Required="false" />
+          Type="Variable" Display="advanced" Required="false" />
+
   <Config Name="Cache DB File"
           Target="CACHE_DB_FILE"
           Default="./cache.db"
-          Mode=""
           Description="(Optional) Filename for audio-probe cache DB."
-          Type="Variable"
-          Display="advanced"
-          Required="false" />
+          Type="Variable" Display="advanced" Required="false" />
 
   <!-- Port -->
   <Config Name="WebUI Port"
@@ -179,7 +144,5 @@
           Default="5005"
           Mode="tcp"
           Description="(Required) Map this host port to container port 5005 for the Web UI."
-          Type="Port"
-          Display="always"
-          Required="true" />
+          Type="Port" Display="always" Required="true" />
 </Container>
