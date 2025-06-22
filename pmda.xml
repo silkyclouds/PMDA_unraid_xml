@@ -6,119 +6,132 @@
   <Network>bridge</Network>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
+
   <Support>https://github.com/silkyclouds/PMDA/issues</Support>
   <Project>https://github.com/silkyclouds/PMDA</Project>
-  <Overview>PMDA: Plex Music DeDupe Assistant – detect and clean duplicate albums in your Plex music library with optional AI assistance.</Overview>
+  <Overview>
+    PMDA – Plex Music DeDupe Assistant.  
+    Detect and clean duplicate albums in your Plex music library (optional AI assistance).
+  </Overview>
   <Category>MediaApp:Music</Category>
+
+  <!-- The CA UI button -->
   <WebUI>http://[IP]:[PORT:5005]</WebUI>
+
   <Icon>https://raw.githubusercontent.com/silkyclouds/PMDA/main/static/P.png</Icon>
 
-  <!-- Required Variables -->
+  <!-- ────────────────────────  ENV-VARS  ───────────────────────── -->
+
+  <!-- Plex basics -->
   <Config Name="Plex Host URL"
           Target="PLEX_HOST"
           Default="http://192.168.3.2:32400"
-          Description="(Required) Base URL of your Plex server, including port."
+          Description="Base URL of your Plex server, including port."
           Type="Variable" Display="always" Required="true" />
 
   <Config Name="Plex Token"
           Target="PLEX_TOKEN"
           Default=""
-          Description="(Required) Your Plex API token (X-Plex-Token)."
+          Description="Your Plex API token (X-Plex-Token)."
           Type="Variable" Display="always" Required="true" Mask="true" />
 
   <Config Name="Music Section ID"
           Target="SECTION_ID"
           Default="1"
-          Description="(Required) Numeric ID of your Plex Music library section."
+          Description="Numeric ID of your Plex *Music* library section."
           Type="Variable" Display="always" Required="true" />
 
-  <Config Name="Path Map"
-          Target="PATH_MAP"
-          Default="{&quot;/music&quot;:&quot;/path/to/music&quot;}"
-          Description="(Required) JSON mapping each Plex-library container path to its corresponding PMDA container path."
-          Type="Variable" Display="always" Required="true" />
-
-  <!-- Mode Selection -->
+  <!-- Run-mode -->
   <Config Name="Default Mode"
           Target="PMDA_DEFAULT_MODE"
           Default="serve"
-          Description="(Required) Choose 'serve' to launch the Web UI, or 'cli' for a command-line scan."
+          Description="'serve' → Web UI  'cli' → command-line scan only."
           Type="Variable" Display="always" Required="true" />
 
-  <!-- Optional AI Settings -->
+  <!-- Path-map used for container→host translation -->
+  <Config Name="Path Map"
+          Target="PATH_MAP"
+          Default="{&quot;/music&quot;:&quot;/path/to/music&quot;}"
+          Description="JSON that maps each Plex-container path to the matching PMDA path."
+          Type="Variable" Display="always" Required="true" />
+
+  <!-- Optional AI -->
   <Config Name="OpenAI Model"
           Target="OPENAI_MODEL"
           Default="gpt-4o-nano"
-          Description="(Optional) LLM model for intelligent duplicate selection."
+          Description="LLM model used for intelligent duplicate selection."
           Type="Variable" Display="always" Required="false" />
 
   <Config Name="OpenAI API Key"
           Target="OPENAI_API_KEY"
           Default=""
-          Description="(Optional) OpenAI API key; leave blank to disable AI assistance."
+          Description="Provide to enable AI assistance; leave blank to disable."
           Type="Variable" Display="always" Required="false" Mask="true" />
 
-  <!-- Behaviour & Logging -->
+  <!-- Logging / performance tweaks -->
   <Config Name="Log Level"
           Target="LOG_LEVEL"
           Default="INFO"
-          Description="(Optional) Logging level: DEBUG, INFO, WARNING, ERROR."
+          Description="DEBUG, INFO, WARNING or ERROR."
           Type="Variable" Display="advanced" Required="false" />
 
   <Config Name="Scan Threads"
           Target="SCAN_THREADS"
           Default="8"
-          Description="(Optional) Number of parallel scanning threads."
+          Description="Number of parallel scanning threads."
           Type="Variable" Display="advanced" Required="false" />
 
-  <!-- Volumes -->
+  <!-- ────────────────────────  VOLUMES  ─────────────────────────── -->
+
   <Config Name="Config Directory"
           Target="/app/config"
           Default="/path/to/appdata/pmda"
           Mode="rw"
-          Description="(Required) Host path for config.json, state.db, cache.db."
+          Description="Holds config.json, state.db and cache.db."
           Type="Path" Display="always" Required="true" />
 
-  <Config Name="Plex DB Volume"
+  <Config Name="Plex DB Folder"
           Target="/database"
           Default="/path/to/plex/Plug-in Support/Databases"
           Mode="ro"
-          Description="(Required) Mount point for Plex DB folder."
+          Description="Mount your Plex *Databases* folder read-only."
           Type="Path" Display="always" Required="true" />
 
-  <Config Name="Music Folder"
+  <Config Name="Music Folder 1"
           Target="/music"
           Default="/path/to/music"
           Mode="rw"
-          Description="(Required) Host path for your music; one mapping per Plex library path."
+          Description="First music library path."
           Type="Path" Display="always" Required="true" />
 
   <Config Name="Music Folder 2"
           Target="/music2"
           Default="/path/to/music2"
           Mode="rw"
-          Description="(Optional) Host path for a second folder composing Plex music library."
+          Description="(Optional) Second music library path."
           Type="Path" Display="always" Required="false" />
 
   <Config Name="Music Folder 3"
           Target="/music3"
           Default="/path/to/music3"
           Mode="rw"
-          Description="(Optional) Host path for a third folder composing Plex music library."
+          Description="(Optional) Third music library path."
           Type="Path" Display="always" Required="false" />
 
-  <Config Name="Dupe Output Volume"
+  <Config Name="Dupe Output Folder"
           Target="/dupes"
           Default="/path/to/music/dupes"
           Mode="rw"
-          Description="(Required) Host path where duplicate albums will be moved."
+          Description="Where PMDA will move the loser folders."
           Type="Path" Display="always" Required="true" />
 
-  <!-- Port Mapping -->
+  <!-- ────────────────────────  PORT  ────────────────────────────── -->
+
+  <!-- Container always listens on 5005; user chooses host-port -->
   <Config Name="WebUI Port"
-          Target="5005"
-          Default="5005"
+          Target="5005"                <!-- container-port -->
+          Default="5005"               <!-- host-port default -->
           Mode="tcp"
-          Description="(Required) Host port to map to container port 5005 for the Web UI."
+          Description="Map any HOST port → container 5005 (Web UI)."
           Type="Port" Display="always" Required="true" />
 </Container>
