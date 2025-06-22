@@ -93,7 +93,7 @@
   <Config Name="Path Map"
           Target="PATH_MAP"
           Default="{&quot;/music&quot;:&quot;/path/to/music&quot;}"
-          Description="(Required) JSON mapping each Plex-library container path to its corresponding PMDA container path, e.g. '/chemin/dans/plex':'/chemin/dans/PMDA'. Ajoutez une entrée par chemin de librairie."
+          Description="(Required) JSON mapping each Plex-library container path to its corresponding PMDA container path, e.g. '/path/in/plex':'/path/in/PMDA'. Add one entry per library path."
           Type="Variable" Display="always" Required="true" />
 
   <!-- Volumes -->
@@ -115,7 +115,7 @@
           Target="/music"
           Default="/path/to/music"
           Mode="rw"
-          Description="(Required) Host path for your music; créez une mapping par chemin Plex."
+          Description="(Required) Host path for your music; create one mapping per Plex library path."
           Type="Path" Display="always" Required="true" />
 
   <Config Name="Dupe Output Volume"
