@@ -44,6 +44,13 @@
           Description="(Required) Container path where Plex's DB folder is mounted."
           Type="Path" Display="always" Required="true" />
 
+  <!-- Mode Selection -->
+  <Config Name="Default Mode"
+          Target="PMDA_DEFAULT_MODE"
+          Default="serve"
+          Description="(Required) Choose 'serve' to launch the Web UI, or 'cli' for a command-line scan."
+          Type="Variable" Display="always" Required="true" />
+
   <!-- Optional AI Settings -->
   <Config Name="OpenAI Model"
           Target="OPENAI_MODEL"
