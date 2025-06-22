@@ -49,7 +49,7 @@
   <!-- ────────── AI (optional) ────────── -->
   <Config Name="OPENAI_MODEL"
           Target="OPENAI_MODEL"
-          Default="gpt-4o-nano"
+          Default="gpt-4.1-nano"
           Description="LLM model for smart duplicate selection."
           Type="Variable" Display="always" Required="false" />
 
