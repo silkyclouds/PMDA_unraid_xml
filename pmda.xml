@@ -103,14 +103,14 @@
           Target="/music2"
           Default="/path/to/music2"
           Mode="rw"
-          Description="(Optional) Host path for a second Plex music library."
+          Description="(Optional) Host path for a second folder composing Plex music library."
           Type="Path" Display="always" Required="false" />
 
   <Config Name="Music Folder 3"
           Target="/music3"
           Default="/path/to/music3"
           Mode="rw"
-          Description="(Optional) Host path for a third Plex music library."
+          Description="(Optional) Host path for a third folder composing Plex music library."
           Type="Path" Display="always" Required="false" />
 
   <Config Name="Dupe Output Volume"
