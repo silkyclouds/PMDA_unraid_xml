@@ -115,6 +115,13 @@
           Description="Where duplicate albums will be moved."
           Type="Path" Display="always" Required="true" />
 
+  <!-- Advanced Plex DB Settings -->
+  <Config Name="Plex DB Path"
+          Target="PLEX_DB_PATH"
+          Default="/database"
+          Description="(Required) Container folder where Plex DB is mounted."
+          Type="Path" Display="advanced" Required="true" /> 
+
   <!-- ────────── PORT (host-side configurable) ────────── -->
   <Config Name="WEBUI_PORT"
           Target="5005"
