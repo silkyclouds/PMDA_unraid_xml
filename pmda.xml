@@ -38,12 +38,6 @@
           Description="(Required) JSON mapping each Plex-library container path to its corresponding PMDA container path."
           Type="Variable" Display="always" Required="true" />
 
-  <Config Name="Plex DB Path"
-          Target="PLEX_DB_PATH"
-          Default="/database"
-          Description="(Required) Container path where Plex's DB folder is mounted."
-          Type="Path" Display="always" Required="true" />
-
   <!-- Mode Selection -->
   <Config Name="Default Mode"
           Target="PMDA_DEFAULT_MODE"
