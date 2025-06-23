@@ -112,6 +112,12 @@
           Mode="rw"
           Description="Folder where moved duplicates are stored."
           Type="Path" Display="always" Required="true" />
+  
+  <Config Name="Plex DB Path"
+          Target="PLEX_DB_PATH"
+          Default="/database"
+          Description="(Advanced) DO NOT CHANGE THIS. Container path where Plex’s database folder is mounted."
+          Type="Path" Display="advanced" Required="true" />
 
   <!-- ──────────── PORTS ──────────── -->
   <Config Name="WebUI Port"
