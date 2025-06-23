@@ -14,7 +14,6 @@
   <WebUI>http://[IP]:[PORT:WEBUI_PORT]/</WebUI>
   <Icon>https://raw.githubusercontent.com/silkyclouds/PMDA/main/static/P.png</Icon>
 
-  <!-- ────────── REQUIRED VARIABLES ────────── -->
   <Config Name="PLEX_HOST"
           Target="PLEX_HOST"
           Default="http://192.168.3.2:32400"
@@ -39,14 +38,12 @@
           Description="JSON mapping each Plex path → its PMDA path."
           Type="Variable" Display="always" Required="true" />
 
-  <!-- Mode -->
   <Config Name="PMDA_DEFAULT_MODE"
           Target="PMDA_DEFAULT_MODE"
           Default="serve"
           Description="'serve' for Web UI, 'cli' for command-line."
           Type="Variable" Display="always" Required="true" />
 
-  <!-- ────────── AI (optional) ────────── -->
   <Config Name="OPENAI_MODEL"
           Target="OPENAI_MODEL"
           Default="gpt-4.1-nano"
@@ -59,7 +56,6 @@
           Description="OpenAI API key – leave blank to disable AI."
           Type="Variable" Display="always" Required="false" Mask="true" />
 
-  <!-- Behaviour & logging -->
   <Config Name="LOG_LEVEL"
           Target="LOG_LEVEL"
           Default="INFO"
@@ -72,7 +68,6 @@
           Description="Parallel scanner threads."
           Type="Variable" Display="advanced" Required="false" />
 
-  <!-- ────────── VOLUMES ────────── -->
   <Config Name="CONFIG_DIR"
           Target="/app/config"
           Default="/path/to/appdata/pmda"
@@ -115,14 +110,12 @@
           Description="Where duplicate albums will be moved."
           Type="Path" Display="always" Required="true" />
 
-  <!-- Advanced Plex DB Settings -->
   <Config Name="Plex DB Path"
           Target="PLEX_DB_PATH"
           Default="/database"
           Description="(Required) Container folder where Plex DB is mounted."
           Type="Path" Display="advanced" Required="true" /> 
 
-  <!-- ────────── PORT (host-side configurable) ────────── -->
   <Config Name="WEBUI_PORT"
           Target="5005"
           Default="5005"
