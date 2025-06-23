@@ -48,7 +48,7 @@
 
   <Config Name="OpenAI Model"
           Target="OPENAI_MODEL"
-          Default="gpt-4o-mini"
+          Default="gpt-4.1-nano"
           Description="LLM model for auto-selection (optional)."
           Type="Variable" Display="always" Required="false" />
 
