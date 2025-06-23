@@ -117,9 +117,10 @@
   <Config Name="Plex DB Path"
           Target="PLEX_DB_PATH"
           Default="/database"
-          Mode="ro"
-          Description="(Advanced) DO NOT CHANGE THIS. Container path where Plex’s database folder is mounted."
-          Type="Path" Display="advanced" Required="true" />
+          Description="(Advanced) DO NOT CHANGE THIS. This is just the env-var. Actual mount is done via ‘Plex DB Folder’."
+          Type="Variable"
+          Display="advanced"
+          Required="true" Mask="false"/>
 
   <!-- PMDA’s own config folder (Advanced: do not modify) -->
   <Config Name="PMDA Config Directory"
