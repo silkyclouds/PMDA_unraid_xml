@@ -114,7 +114,7 @@
           Type="Path" Display="always" Required="true" />
 
   <!-- ──────────── PORTS ──────────── -->
-  <Config Name="WEBUI_PORT"
+  <Config Name="WebUI Port"
           Target="5005"
           Default="5005"
           Mode="tcp"
