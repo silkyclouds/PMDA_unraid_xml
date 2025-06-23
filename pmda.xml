@@ -122,13 +122,13 @@
           Display="advanced"
           Required="true" Mask="false"/>
 
-  <!-- PMDA’s own config folder (Advanced: do not modify) -->
   <Config Name="PMDA Config Directory"
           Target="PMDA_CONFIG_DIR"
           Default="/config"
-          Mode="rw"
           Description="(Advanced) DO NOT CHANGE THIS. Container path where PMDA stores its config.json, state.db and cache.db."
-          Type="Path" Display="advanced" Required="true" />
+          Type="Variable"
+          Display="advanced"
+          Required="true" />
 
   <!-- ──────────── PORTS ──────────── -->
   <Config Name="WebUI Port"
