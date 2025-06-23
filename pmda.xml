@@ -118,6 +118,14 @@
           Default="/database"
           Description="(Advanced) DO NOT CHANGE THIS. Container path where Plex’s database folder is mounted."
           Type="Path" Display="advanced" Required="true" />
+  
+  <Config Name="PMDA Config Directory"
+        Target="PMDA_CONFIG_DIR"
+        Default="/config"
+        Description="(Advanced) DO NOT CHANGE THIS. Container path where PMDA stores its config.json, state.db and cache.db."
+        Type="Path"
+        Display="advanced"
+        Required="true" />
 
   <!-- ──────────── PORTS ──────────── -->
   <Config Name="WebUI Port"
