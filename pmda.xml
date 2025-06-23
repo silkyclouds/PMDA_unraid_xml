@@ -12,7 +12,7 @@
   <Project>https://github.com/silkyclouds/PMDA</Project>
   <Overview>PMDA: Plex Music DeDupe Assistant – detect and clean duplicate albums in your Plex music library with optional AI assistance.</Overview>
   <Category>MediaApp:Music</Category>
-  <WebUI>http://[IP]:[PORT:WEBUI_PORT]/</WebUI>
+  <WebUI>http://[IP]:[PORT:5005]/</WebUI>
   <Icon>https://raw.githubusercontent.com/silkyclouds/PMDA/main/static/P.png</Icon>
 
   <!-- ──────────── VARIABLES ──────────── -->
