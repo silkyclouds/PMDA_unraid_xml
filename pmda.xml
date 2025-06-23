@@ -113,19 +113,21 @@
           Description="Folder where moved duplicates are stored."
           Type="Path" Display="always" Required="true" />
   
+  <!-- Plex’s database path (Advanced: do not modify) -->
   <Config Name="Plex DB Path"
           Target="PLEX_DB_PATH"
           Default="/database"
+          Mode="ro"
           Description="(Advanced) DO NOT CHANGE THIS. Container path where Plex’s database folder is mounted."
           Type="Path" Display="advanced" Required="true" />
-  
+
+  <!-- PMDA’s own config folder (Advanced: do not modify) -->
   <Config Name="PMDA Config Directory"
-        Target="PMDA_CONFIG_DIR"
-        Default="/config"
-        Description="(Advanced) DO NOT CHANGE THIS. Container path where PMDA stores its config.json, state.db and cache.db."
-        Type="Path"
-        Display="advanced"
-        Required="true" />
+          Target="PMDA_CONFIG_DIR"
+          Default="/config"
+          Mode="rw"
+          Description="(Advanced) DO NOT CHANGE THIS. Container path where PMDA stores its config.json, state.db and cache.db."
+          Type="Path" Display="advanced" Required="true" />
 
   <!-- ──────────── PORTS ──────────── -->
   <Config Name="WebUI Port"
