@@ -78,7 +78,7 @@
 
   <!-- ──────────── PATHS ──────────── -->
   <Config Name="Config Directory"
-          Target="/app/config"
+          Target="/config"
           Default="/path/to/appdata/pmda"
           Mode="rw"
           Description="Holds config.json / state.db / cache.db."
