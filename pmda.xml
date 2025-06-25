@@ -34,12 +34,6 @@
           Description="Numeric ID of the Plex music library."
           Type="Variable" Display="always" Required="true" />
 
-  <Config Name="Path Map"
-          Target="PATH_MAP"
-          Default="{&quot;/music&quot;:&quot;/path/to/music&quot;}"
-          Description="JSON map of Plex paths → PMDA paths."
-          Type="Variable" Display="always" Required="true" />
-
   <Config Name="Default Mode (serve / cli)"
           Target="PMDA_DEFAULT_MODE"
           Default="serve"
