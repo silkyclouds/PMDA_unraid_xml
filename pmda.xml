@@ -60,8 +60,8 @@
   
   <Config Name="Use MusicBrainz API"
         Target="USE_MUSICBRAINZ"
-        Default="true"
-        Description="OPTIONAL: set to false to skip all MusicBrainz lookups during scans and speed up processing."
+        Default="false"
+        Description="OPTIONAL: set to true to use MusicBrainz lookups during scans. SLOWS DOWN THE SCANS"
         Type="Variable" Display="always" Required="false" Mask="false" />
   
   <Config Name="Log Level"
