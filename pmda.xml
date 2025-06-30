@@ -58,6 +58,12 @@
           Description="OPTIONAL : enter your discord webhook to get dupes and statistics right in your favorite discord server."
           Type="Variable" Display="always" Required="false" Mask="true" />
   
+  <Config Name="Use MusicBrainz API"
+        Target="USE_MUSICBRAINZ"
+        Default="true"
+        Description="OPTIONAL: set to false to skip all MusicBrainz lookups during scans and speed up processing."
+        Type="Variable" Display="always" Required="false" Mask="false" />
+  
   <Config Name="Log Level"
           Target="LOG_LEVEL"
           Default="INFO"
