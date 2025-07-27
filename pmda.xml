@@ -64,6 +64,12 @@
         Description="OPTIONAL: set to true to use MusicBrainz lookups during scans. SLOWS DOWN THE SCANS"
         Type="Variable" Display="always" Required="false" Mask="false" />
   
+  <Config Name="Skip Folders"
+          Target="SKIP_FOLDERS"
+          Default=""
+          Description="OPTIONAL: comma-separated list of folder paths to skip during scans. If an album is in any of these folders, it will not be processed."
+          Type="Variable" Display="always" Required="false" Mask="false" />
+  
   <Config Name="Log Level"
           Target="LOG_LEVEL"
           Default="INFO"
