@@ -16,6 +16,7 @@
   <Icon>https://raw.githubusercontent.com/silkyclouds/PMDA/main/static/P.png</Icon>
 
   <!-- ──────────── VARIABLES ──────────── -->
+
   <Config Name="Plex Host URL"
           Target="PLEX_HOST"
           Default="http://192.168.3.2:32400"
@@ -30,9 +31,9 @@
 
   <Config Name="Music Section ID"
           Target="SECTION_ID"
-          Default="1"
-          Description="Numeric ID of the Plex music library."
-          Type="Variable" Display="always" Required="true" />
+          Default=""
+          Description="OPTIONAL: Comma-separated list of Plex music library section IDs. Leave empty to auto-detect all music libraries (recommended)."
+          Type="Variable" Display="always" Required="false" />
 
   <Config Name="Default Mode (serve / cli)"
           Target="PMDA_DEFAULT_MODE"
@@ -51,102 +52,92 @@
           Default=""
           Description="Leave blank to disable AI assistance."
           Type="Variable" Display="always" Required="false" Mask="true" />
-  
+
   <Config Name="Discord Webhook URL"
           Target="DISCORD_WEBHOOK"
           Default=""
-          Description="OPTIONAL : enter your discord webhook to get dupes and statistics right in your favorite discord server."
+          Description="OPTIONAL: Enter your Discord webhook to receive dedupe reports and stats directly in your server."
           Type="Variable" Display="always" Required="false" Mask="true" />
-  
+
   <Config Name="Use MusicBrainz API"
-        Target="USE_MUSICBRAINZ"
-        Default="false"
-        Description="OPTIONAL: set to true to use MusicBrainz lookups during scans. SLOWS DOWN THE SCANS"
-        Type="Variable" Display="always" Required="false" Mask="false" />
-  
+          Target="USE_MUSICBRAINZ"
+          Default="false"
+          Description="OPTIONAL: Set to true to use MusicBrainz lookups during scans. Slows down processing!!!"
+          Type="Variable" Display="always" Required="false" />
+
+  <Config Name="Cross-Library Comparison"
+          Target="CROSS_LIBRARY_DEDUPE"
+          Default="true"
+          Description="Set to true to detect duplicates across all music libraries, or false to dedupe within each library independently."
+          Type="Variable" Display="always" Required="false" />
+
   <Config Name="Skip Folders"
           Target="SKIP_FOLDERS"
           Default=""
-          Description="OPTIONAL: comma-separated list of folder paths to skip during scans. If an album is in any of these folders, it will not be processed."
-          Type="Variable" Display="always" Required="false" Mask="false" />
-  
+          Description="OPTIONAL: Comma-separated list of folder paths to exclude from scans (e.g. '/music/Trash')."
+          Type="Variable" Display="always" Required="false" />
+
   <Config Name="Log Level"
           Target="LOG_LEVEL"
           Default="INFO"
-          Description="DEBUG, INFO, WARNING or ERROR."
+          Description="Set logging verbosity: DEBUG, INFO, WARNING or ERROR."
           Type="Variable" Display="advanced" Required="false" />
 
   <Config Name="Scan Threads"
           Target="SCAN_THREADS"
           Default="8"
-          Description="Parallel threads used during scanning."
-          Type="Variable" Display="advanced" Required="false" />
+          Description="Number of parallel threads used during scanning."
+          Type="Variable" Display="always" Required="false" />
 
   <!-- ──────────── PATHS ──────────── -->
+
   <Config Name="Config Directory"
           Target="/config"
-          Default="/path/to/appdata/pmda"
+          Default="/mnt/user/appdata/pmda"
           Mode="rw"
-          Description="Holds config.json / state.db / cache.db."
+          Description="Holds PMDA config.json, state.db and cache.db."
           Type="Path" Display="always" Required="true" />
 
   <Config Name="Plex DB Folder"
           Target="/database"
-          Default="/path/to/plex/Plug-in Support/Databases"
+          Default="/mnt/user/appdata/plex/Library/Application Support/Plex Media Server/Plug-in Support/Databases"
           Mode="ro"
-          Description="Folder that contains com.plexapp.plugins.library.db."
+          Description="Folder containing Plex's 'com.plexapp.plugins.library.db' file."
           Type="Path" Display="always" Required="true" />
 
-  <Config Name="Music Folder"
+  <Config Name="Parent Music Folder"
           Target="/music"
-          Default="/path/to/music"
+          Default="/mnt/user/music/"
           Mode="rw"
-          Description="Primary music library path."
+          Description="Parent folder containing all your music libraries. PMDA will auto-discover subfolders on first run."
           Type="Path" Display="always" Required="true" />
-
-  <Config Name="Music Folder 2"
-          Target="/music2"
-          Default="/path/to/music2"
-          Mode="rw"
-          Description="Second music library path (optional)."
-          Type="Path" Display="always" Required="false" />
-
-  <Config Name="Music Folder 3"
-          Target="/music3"
-          Default="/path/to/music3"
-          Mode="rw"
-          Description="Third music library path (optional)."
-          Type="Path" Display="always" Required="false" />
 
   <Config Name="Dupe Output"
           Target="/dupes"
-          Default="/path/to/music/dupes"
+          Default="/mnt/user/music/dupes"
           Mode="rw"
-          Description="Folder where moved duplicates are stored."
+          Description="Folder where PMDA will move duplicates if configured to do so."
           Type="Path" Display="always" Required="true" />
-  
+
   <!-- Plex’s database path (Advanced: do not modify) -->
-  <Config Name="Plex DB Path"
+  <Config Name="PLEX_DB_PATH"
           Target="PLEX_DB_PATH"
           Default="/database"
-          Description="(Advanced) DO NOT CHANGE THIS. This is just the env-var. Actual mount is done via ‘Plex DB Folder’."
-          Type="Variable"
-          Display="advanced"
-          Required="true" Mask="false"/>
+          Description="(Advanced) DO NOT CHANGE THIS. Used internally to locate Plex's database."
+          Type="Variable" Display="hidden" Required="true" />
 
-  <Config Name="PMDA Config Directory"
+  <!-- PMDA internal config path -->
+  <Config Name="PMDA_CONFIG_DIR"
           Target="PMDA_CONFIG_DIR"
           Default="/config"
-          Description="(Advanced) DO NOT CHANGE THIS. Container path where PMDA stores its config.json, state.db and cache.db."
-          Type="Variable"
-          Display="advanced"
-          Required="true" />
+          Description="(Advanced) DO NOT CHANGE THIS. Used internally to store configuration and scan state."
+          Type="Variable" Display="hidden" Required="true" />
 
   <!-- ──────────── PORTS ──────────── -->
   <Config Name="WebUI Port"
           Target="5005"
           Default="5005"
           Mode="tcp"
-          Description="Host port mapped to container 5005 (Web UI)."
+          Description="Host port mapped to container's Web UI (http://[IP]:[PORT]/)."
           Type="Port" Display="always" Required="true" />
 </Container>
