@@ -85,7 +85,7 @@
 
   <Config Name="Scan Threads"
           Target="SCAN_THREADS"
-          Default="8"
+          Default="all"
           Description="Number of parallel threads used to scan your library. Default is number of CPU cores."
           Type="Variable" Display="always" Required="false" />
 
