@@ -67,7 +67,7 @@
 
   <Config Name="Cross-Library Comparison"
           Target="CROSS_LIBRARY_DEDUPE"
-          Default="true"
+          Default="false"
           Description="If true, compare albums across all libraries. If false, dedupe only within each library."
           Type="Variable" Display="always" Required="false" />
 
