@@ -33,7 +33,7 @@
           Target="SECTION_ID"
           Default=""
           Description="OPTIONAL: Comma-separated list of Plex music section IDs. Leave blank to auto-detect all music libraries."
-          Type="Variable" Display="always" Required="false" />
+          Type="Variable" Display="advanced" Required="false" />
 
   <Config Name="Default Mode (serve / cli)"
           Target="PMDA_DEFAULT_MODE"
@@ -45,7 +45,7 @@
           Target="OPENAI_MODEL"
           Default="gpt-5-nano"
           Description="LLM model used for AI-based edition selection. Optional but HIGHLY recommended!"
-          Type="Variable" Display="always" Required="false" />
+          Type="Variable" Display="advanced" Required="false" />
 
   <Config Name="OpenAI API Key"
           Target="OPENAI_API_KEY"
@@ -57,7 +57,7 @@
           Target="DISCORD_WEBHOOK"
           Default=""
           Description="OPTIONAL: Discord webhook to receive dedupe reports and alerts."
-          Type="Variable" Display="always" Required="false" Mask="true" />
+          Type="Variable" Display="advanced" Required="false" Mask="true" />
 
   <Config Name="Use MusicBrainz API"
           Target="USE_MUSICBRAINZ"
@@ -75,7 +75,7 @@
           Target="SKIP_FOLDERS"
           Default=""
           Description="OPTIONAL: Comma-separated list of folders to exclude from scanning (e.g. /music/Trash)."
-          Type="Variable" Display="always" Required="false" />
+          Type="Variable" Display="advanced" Required="false" />
 
   <Config Name="Log Level"
           Target="LOG_LEVEL"
