@@ -43,7 +43,7 @@
 
   <Config Name="OpenAI Model"
           Target="OPENAI_MODEL"
-          Default="gpt-5-nano"
+          Default="gpt-4.1-nano"
           Description="LLM model used for AI-based edition selection. Optional but HIGHLY recommended!"
           Type="Variable" Display="advanced" Required="false" />
 
