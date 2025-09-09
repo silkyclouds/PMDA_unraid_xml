@@ -136,14 +136,14 @@
           Target="PLEX_DB_PATH"
           Default="/database"
           Description="(Advanced) DO NOT CHANGE THIS. Used internally to locate Plex's database."
-          Type="Variable" Display="hidden" Required="true" />
+          Type="Variable" Display="advanced" Required="true" />
 
   <!-- PMDA internal config path -->
   <Config Name="PMDA_CONFIG_DIR"
           Target="PMDA_CONFIG_DIR"
           Default="/config"
           Description="(Advanced) DO NOT CHANGE THIS. Used internally to store configuration and scan state."
-          Type="Variable" Display="hidden" Required="true" />
+          Type="Variable" Display="advanced" Required="true" />
 
   <!-- ──────────── PORTS ──────────── -->
 
