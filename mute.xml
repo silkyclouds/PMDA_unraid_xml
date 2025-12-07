@@ -25,7 +25,7 @@ Local MQTT integration is fully optional and allows publishing data to Home Assi
 More info on https://muteq.eu.
   </Overview>
 
-  <Category>Other,HomeAutomation</Category>
+  <Category>Other;HomeAutomation</Category>
   <WebUI></WebUI>
 
   <!-- ICON -->
