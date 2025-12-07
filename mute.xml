@@ -7,12 +7,25 @@
   <Registry>https://hub.docker.com/r/meaning/mute-client</Registry>
   <Network>bridge</Network>
   <Shell>/bin/sh</Shell>
-  <Privileged>true</Privileged>
+  <Privileged>false</Privileged>
 
   <Support>https://github.com/silkyclouds/mute</Support>
   <Project>https://muteq.eu/</Project>
-  <Overview>Acoustic Intelligence for Everyone – Real-time noise monitoring and analytics.</Overview>
-  <Category>Other</Category>
+
+  <Overview>
+Acoustic Intelligence for Everyone.
+Monitor, analyze, and understand your sound environment with smart, affordable sensors and a powerful analytics dashboard.
+
+Mute turns your USB sound level meter into a real-time acoustic monitoring device.
+Your data appears automatically in your personal dashboard — like the one on https://dash.muteq.eu —
+where you can visualize noise trends, detect peaks, compare time periods, and explore your environment through clear, intuitive charts.
+
+Local MQTT integration is fully optional and allows publishing data to Home Assistant or any automation platform.
+
+More info on https://muteq.eu.
+  </Overview>
+
+  <Category>Other,HomeAutomation</Category>
   <WebUI></WebUI>
 
   <!-- ICON -->
@@ -31,46 +44,45 @@
           Target="/dev/bus/usb"
           Default=""
           Mode=""
-          Description="Pass through the USB sound level meter or any supported audio meter. 
-To identify the correct device on Unraid, run 'lsusb' in the terminal, then map the corresponding /dev/bus/usb/XXX/YYY path."
+          Description="USB sound level meter to pass through. Run 'lsusb' on Unraid to identify and map the correct /dev/bus/usb/XXX/YYY device."
           Type="Device" Display="always" Required="true" />
 
   <!-- ───────── MQTT (OPTIONAL) ───────── -->
 
-  <Config Name="MQTT Enabled"
+  <Config Name="Local MQTT Enabled (Optional)"
           Target="LOCAL_MQTT_ENABLED"
           Default="false"
-          Description="Enable MQTT publishing for local Home Assistant / automation integration."
+          Description="Optional — enable this only if you want to publish noise data to your local MQTT broker (e.g., for Home Assistant)."
           Type="Variable" Display="always" Required="false" />
 
-  <Config Name="MQTT Server"
+  <Config Name="Local MQTT Server (Optional)"
           Target="LOCAL_MQTT_SERVER"
           Default=""
-          Description="MQTT broker hostname or IP."
+          Description="Optional — hostname or IP of your local MQTT broker."
           Type="Variable" Display="always" Required="false" />
 
-  <Config Name="MQTT Port"
+  <Config Name="Local MQTT Port (Optional)"
           Target="LOCAL_MQTT_PORT"
           Default="1883"
-          Description="MQTT broker port."
+          Description="Optional — port of your local MQTT broker."
           Type="Variable" Display="always" Required="false" />
 
-  <Config Name="MQTT Username"
+  <Config Name="Local MQTT Username (Optional)"
           Target="LOCAL_MQTT_USER"
           Default=""
-          Description="MQTT username (optional)."
+          Description="Optional — username for your local MQTT broker."
           Type="Variable" Display="always" Required="false" />
 
-  <Config Name="MQTT Password"
+  <Config Name="Local MQTT Password (Optional)"
           Target="LOCAL_MQTT_PASS"
           Default=""
-          Description="MQTT password (optional)."
+          Description="Optional — password for your local MQTT broker."
           Type="Variable" Display="always" Required="false" Mask="true" />
 
-  <Config Name="MQTT TLS"
+  <Config Name="Local MQTT TLS (Optional)"
           Target="LOCAL_MQTT_TLS"
           Default="false"
-          Description="Enable TLS encryption when connecting to the MQTT broker."
+          Description="Optional — enable TLS encrypted connection to your local MQTT broker."
           Type="Variable" Display="always" Required="false" />
 
 </Container>
