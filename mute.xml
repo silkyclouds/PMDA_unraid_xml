@@ -17,7 +17,7 @@ Acoustic Intelligence for Everyone.
 Monitor, analyze, and understand your sound environment with smart, affordable sensors and a powerful analytics dashboard.
 
 Mute turns your USB sound level meter into a real-time acoustic monitoring device.
-Your data appears automatically in your personal dashboard — like the one on https://dash.muteq.eu —
+Your data appears automatically in your personal dashboard — on https://dash.muteq.eu —
 where you can visualize noise trends, detect peaks, compare time periods, and explore your environment through clear, intuitive charts.
 
 Local MQTT integration is fully optional and allows publishing data to Home Assistant or any automation platform.
