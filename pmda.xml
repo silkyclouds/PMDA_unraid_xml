@@ -9,7 +9,7 @@
   <Privileged>false</Privileged>
   <Support>https://github.com/silkyclouds/PMDA/issues</Support>
   <Project>https://pmda.muteq.eu/</Project>
-  <Overview>PMDA matches music folders, isolates duplicates and incomplete releases, publishes a fast PostgreSQL-backed library, and provides playback, recommendations, and export workflows.</Overview>
+  <Overview>PMDA (pronounced "pimda") is a self-hosted music library app and processing pipeline for large collections. It scans and imports folders, preserves trusted provider tags and artwork, matches albums, publishes a fast PostgreSQL-backed library, powers playback, history, recommendations, artist pages, and clean downstream exports, and can also isolate duplicate or incomplete releases for review.</Overview>
   <Category>MediaApp:Music</Category>
   <WebUI>http://[IP]:[PORT:5005]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/silkyclouds/PMDA_unraid_xml/main/pmda.xml</TemplateURL>
